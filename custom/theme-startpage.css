@@ -1,0 +1,31 @@
+/**
+ * A theme that provides native macOS experiences.
+ */
+
+/* -------------------------------------
+ *   Reset
+ * ------------------------------------- */
+
+/* -------------------------------------
+ *   Layout
+ * ------------------------------------- */
+
+.startpage .searchfield {
+  display: none;
+}
+
+/* -------------------------------------
+ *   Styles
+ * ------------------------------------- */
+
+.startpage {
+  background-color: #e2e3e4 !important;
+}
+
+.startpage-navigation {
+  background-color: #f1f0f2 !important;
+}
+
+button.button-startpage::after {
+  display: none;
+}

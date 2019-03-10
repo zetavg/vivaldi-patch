@@ -1,0 +1,41 @@
+/**
+ * Extensions Wrapper
+ *
+ * Provide basic functionality for the pop-up extensions wrapper.
+ */
+
+.extensions-wrapper {
+  display: none;
+  position: absolute;
+  z-index: 99999;
+  overflow: visible;
+}
+
+#app.show-extensions .extensions-wrapper {
+  display: block !important;
+}
+
+#show-extensions-overlay {
+  display: none;
+  z-index: 9998;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: all;
+}
+
+#app.show-extensions #show-extensions-overlay {
+  display: block;
+}
+
+#app.show-extensions #main * {
+  -webkit-app-region: none;
+}
+
+.extensions-wrapper .button-toolbar {
+  transition: none !important;
+  transform: none !important;
+  animation: none !important;
+}

@@ -1,0 +1,87 @@
+#!/usr/bin/env bash
+#
+# Patch Vivaldi.
+#
+# Modified from luetage's script on
+# https://forum.vivaldi.net/topic/20291/os-x-batch-files-for-patching-in-css-update-and-js/4
+
+set -eu
+
+BASEDIR=$(cd "$(dirname "$0")"; pwd)
+cd "$BASEDIR"
+
+vivaldiAppPath="/Applications/Vivaldi.app"
+
+if [[ -d "$vivaldiAppPath" ]]; then
+  echo "Found Vivaldi at $vivaldiAppPath, patching..."
+  xattr -rc "$vivaldiAppPath"
+
+  frameworkPath="$(find "$vivaldiAppPath" -name Vivaldi\ Framework.framework)"
+  echo "  Vivaldi framework path: $frameworkPath"
+
+  # 1. Copy Custom Files and Patch browser.html
+  echo "  Copying custom files and patching browser.html..."
+  browserHtmlPath="$frameworkPath/Resources/vivaldi/browser.html"
+  # Create an original copy of the file if not exists
+  if [[ ! -f "$browserHtmlPath.org" ]]; then
+    cp "$browserHtmlPath" "$browserHtmlPath.org"
+  fi
+  # Create a temporary file from the original copy for patching
+  cp "$browserHtmlPath.org" "$browserHtmlPath.temp"
+  cd custom
+  # Copy JS files and patch browser.html on the way
+  for jsFile in *.js; do
+    echo "    Adding custom JS file: $jsFile..."
+    cp "$jsFile" "$frameworkPath/Resources/vivaldi/"
+    sed "s|  </body>|    <script src=\"$jsFile\"></script>\\\\  </body>|" "$browserHtmlPath.temp" | tr '\\' '\n' > "$browserHtmlPath.temp.patching"
+    mv "$browserHtmlPath.temp.patching" "$browserHtmlPath.temp"
+  done
+  # Copy CSS files and patch browser.html on the way
+  for cssFile in *.css; do
+    echo "    Adding custom CSS file: $cssFile..."
+    cp "$cssFile" "$frameworkPath/Resources/vivaldi/style"
+    sed "s|  </head>|    <link rel=\"stylesheet\" href=\"style/$cssFile\" />\\\\  </head>|" "$browserHtmlPath.temp" | tr '\\' '\n' > "$browserHtmlPath.temp.patching"
+    mv "$browserHtmlPath.temp.patching" "$browserHtmlPath.temp"
+  done
+  # Override
+  mv "$browserHtmlPath.temp" "$browserHtmlPath.patched"
+  cp "$browserHtmlPath.patched" "$browserHtmlPath"
+  cd ..
+
+  # 2. Patch bundle.js
+  echo "  Patching bundle.js..."
+  bundleJsPath="$frameworkPath/Resources/vivaldi/bundle.js"
+  # Create an original copy of the file if not exists
+  if [[ ! -f "$bundleJsPath.org" ]]; then
+    cp "$bundleJsPath" "$bundleJsPath.org"
+  fi
+  # Create a temporary file from the original copy for patching
+  cp "$bundleJsPath.org" "$bundleJsPath.temp"
+  # Apply each patch
+  for patchScript in patch-js/*; do
+    echo "    Applying patch: $patchScript"
+    cat "$bundleJsPath.temp" | bash "$patchScript" > "$bundleJsPath.temp.patching"
+    mv "$bundleJsPath.temp.patching" "$bundleJsPath.temp"
+  done
+  # Prepend each prepend file
+  for prependSource in prepend-js/*; do
+    echo "    Prepending file: $prependSource"
+    cat "$prependSource" "$bundleJsPath.temp" > "$bundleJsPath.temp.patching"
+    mv "$bundleJsPath.temp.patching" "$bundleJsPath.temp"
+  done
+  # Overwrite
+  mv "$bundleJsPath.temp" "$bundleJsPath.patched"
+  cp "$bundleJsPath.patched" "$bundleJsPath"
+
+  perferredIcnsFile="$HOME/Library/Mobile Documents/com~apple~CloudDocs/圖片/Icons/Web Browser.icns"
+
+  # 3. Patch App Icon
+  if [[ -f "$perferredIcnsFile" ]]; then
+    echo "Patching app.icns..."
+    cp "$perferredIcnsFile" "$vivaldiAppPath/Contents/Resources/app.icns"
+    touch "$vivaldiAppPath"
+    touch "$vivaldiAppPath/Contents/Info.plist"
+  fi
+
+  echo "Vivaldi Patched"
+fi

@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+#
+# Patch and restart Vivaldi.
+
+set -eu
+
+BASEDIR=$(cd "$(dirname "$0")"; pwd)
+cd "$BASEDIR"
+
+# Quit Vivaldi
+osascript -e 'quit app "Vivaldi.app"'
+
+./patch
+
+# Open Vivaldi
+sleep 3
+open /Applications/Vivaldi.app --args --debug-packed-apps --silent-debugger-extension-api

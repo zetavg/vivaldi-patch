@@ -1,0 +1,70 @@
+/**
+ * Layout
+ *
+ * Just putting things in place.
+ * To apply this layout, tab bar position need to be set to bottom on app settings.
+ */
+
+:root {
+  --titlebarHeight: 38px;
+}
+
+body {
+  background-image: none !important;
+}
+
+#app {
+  opacity: 0;
+  transition: opacity 0.1s;
+}
+
+#app.ready {
+  opacity: 1;
+}
+
+#browser:not(.is-settingspage) #header {
+  position: absolute;
+  width: 64px;
+  background: transparent !important;
+}
+
+#browser:not(.is-settingspage) #titlebar {
+  z-index: 1000;
+  display: flex;
+  height: var(--titlebarHeight);
+  align-items: center;
+  background: transparent;
+}
+
+#browser:not(.is-settingspage) #titlebar #pagetitle {
+  display: none;
+}
+
+#browser:not(.is-settingspage) #titlebar .window-buttongroup {
+  margin-top: 0 !important;
+  margin-bottom: 4px !important;
+  margin-left: 10px !important;
+}
+
+#main .toolbar-addressbar {
+  -webkit-app-region: drag;
+  height: var(--titlebarHeight);
+  padding-top: 0;
+  padding-left: 72px;
+  padding-right: 8px;
+}
+
+#tabs-container {
+  position: relative;
+}
+
+#main + div:not(#header):not(#footer) {
+  display: none;
+}
+
+.mac#browser.popup #titlebar,
+.mac#browser.popup #header,
+.mac#browser.popup .settings-header {
+  height: 32px;
+  box-shadow: none;
+}

@@ -1,0 +1,21 @@
+/**
+ * A theme that provides native macOS experiences.
+ */
+
+/* -------------------------------------
+ *   Reset
+ * ------------------------------------- */
+
+/* -------------------------------------
+ *   Layout
+ * ------------------------------------- */
+
+.extensions-wrapper {
+  right: 8px;
+  top: calc(var(--titlebarHeight) - 4px);
+  max-width: calc(100vw - 16px);
+  width: 320px;
+  border-radius: 4px;
+  background-color: #f6f6f6;
+  box-shadow: 0 5px 32px rgba(0, 0, 0, 0.35);
+}

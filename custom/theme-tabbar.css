@@ -1,0 +1,332 @@
+/**
+ * A theme that provides native macOS experiences.
+ */
+
+:root {
+  --orgTabHeight: 30px;
+  --tabHeight: 25px;
+  --tabHeightAdjestment: calc(var(--tabHeight) - var(--orgTabHeight));
+}
+
+/* -------------------------------------
+ *   Reset
+ * ------------------------------------- */
+
+.toolbar-addressbar .button-toolbar:active > * {
+  transform: none !important;
+}
+
+/* -------------------------------------
+ *   Layout
+ * ------------------------------------- */
+
+#tabs-container {
+  padding-top: 0 !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  margin-right: -30px;
+}
+
+#tabs-container.top {
+  margin-top: var(--tabHeightAdjestment);
+}
+
+#tabs-container.top .tab-strip {
+  margin-top: calc(-1 * var(--tabHeightAdjestment));
+}
+
+#tabs-container .sync-and-trash-container .trash {
+  display: none;
+}
+
+#subtabs-container,
+#subtabs-container .tab-strip {
+  height: var(--tabHeight);
+}
+
+.tab-strip .tab {
+  margin: 0 !important
+}
+
+/* ----- Layout: Inside Tab ----- */
+
+.tab-strip .button-tabbar.newtab {
+  min-height: var(--tabHeight) !important;
+  min-width: var(--tabHeight) !important;
+  height: var(--tabHeight) !important;
+  width: var(--tabHeight) !important;
+  padding-top: 0;
+}
+
+.tab-strip .tab .close {
+  order: unset !important;
+}
+
+.tab-strip .tab .tab-header {
+  flex: 0 0 var(--tabHeight);
+  padding-top: 0;
+  padding-bottom: 0.1px;
+  padding-left: 0;
+  align-items: center;
+}
+
+.tab-strip .tab .favicon {
+  margin-left: 8px;
+  display: block !important;
+  animation: none;
+  min-height: 14px;
+  min-width: 14px;
+  height: 14px;
+  width: 14px;
+  flex: 0 0 14px;
+}
+
+.tab-strip .tab.pinned .favicon {
+  margin-left: 9px;
+}
+
+.tab-strip .tab .favicon .spinner {
+  min-height: 14px;
+  min-width: 14px;
+  height: 14px;
+  width: 14px;
+  margin: 0;
+}
+
+.tab-strip .tab button.close {
+  margin-right: 4px;
+}
+
+.tab-strip .tab:hover button.close,
+.tab-strip .tab button.close:hover {
+  display: flex !important;
+}
+
+.tab-strip .tab .progress-indicator {
+  background-color: var(--colorAccentBg) !important;
+  pointer-events: none;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  height: auto !important;
+}
+
+.tab-strip .tab:hover .progress-indicator {
+  display: none;
+}
+
+.tab-strip .tab .tab-group-indicator {
+  top: calc(var(--tabHeight) - 4px) !important;
+  left: 1px !important;
+  right: 1px !important;
+}
+
+.tab-strip .tab.active .tab-group-indicator {
+  display: none;
+}
+
+.tab-strip .tab .tab-indicator {
+  border: 0 !important;
+  height: 2px !important;
+}
+
+.tab-strip .tab .tab-indicator:first-of-type {
+  border-top-left-radius: 12px !important;
+  border-bottom-left-radius: 12px !important;
+}
+
+.tab-strip .tab .tab-indicator:last-of-type {
+  border-top-right-radius: 12px !important;
+  border-bottom-right-radius: 12px !important;
+}
+
+.tab-strip .tab .tab-indicator {
+  background-color: var(--colorHighlightFgAlpha) !important;
+}
+
+.tab-strip .tab .tab-indicator.active {
+  background-color: var(--colorAccentBgAlphaHeavy) !important;
+}
+
+.tab-strip .tab .tab-indicator:hover {
+  background-color: var(--colorAccentFgAlpha) !important;
+}
+
+.tab-strip .tab .tab-indicator:hover {
+  opacity: 0.8;
+}
+
+.tab-strip .tab .tab-indicator.active {
+  opacity: 0.7;
+}
+
+.tab-strip .tab.pinned .title {
+  display: none !important;
+}
+
+/* -------------------------------------
+ *   Logical & Fundamental Styles
+ * ------------------------------------- */
+
+.tab-strip {
+  overflow: hidden;
+}
+
+.tab-strip::after {
+  content: "";
+  z-index: 100;
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+}
+
+.tab-strip .tab {
+  transition-property: background-color;
+  transition-duration: .16s;
+}
+
+.tab-strip .tab {
+  border-radius: 0 !important;
+}
+
+.tab-strip .tab:not(:hover) .title {
+  margin-right: -12px;
+}
+
+.tab-strip .tab .title {
+  opacity: 0.72;
+}
+
+.tab-strip .tab:hover .title {
+  opacity: 0.9;
+}
+
+.tab-strip .tab.active .title {
+  opacity: 1;
+}
+
+.tab-strip .tab button.close {
+  background-color: transparent;
+  animation: none;
+  display: flex !important;
+  opacity: 0;
+  transition-property: opacity;
+  transition-duration: .16s;
+}
+
+.tab-strip .tab:hover button.close {
+  opacity: 1;
+}
+
+.tab-strip .tab button.close:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.tab-strip .tab button.close svg {
+  opacity: 0.8;
+}
+
+.tab-strip .tab .tab-indicator  {
+  max-width: 24px;
+}
+
+#subtabs-container {
+  transition-property: padding;
+  transition-duration: 0.3s;
+}
+
+#subtabs-container .tab {
+  border-radius: 4px !important;
+  margin: 4px 4px !important;
+  margin-right: 0 !important;
+  font-size: var(--fontSizeSmall) !important;
+}
+
+#subtabs-container .tab-strip .tab .tab-header {
+  flex: 0 0 calc(var(--tabHeight) - 8px);
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+#subtabs-container .tab-strip .tab .tab-header .title {
+  padding-top: 1px;
+}
+
+#subtabs-container .tab-strip .tab .favicon {
+  margin-left: 4px;
+  min-height: 12px;
+  min-width: 12px;
+  height: 12px;
+  width: 12px;
+  flex: 0 0 12px;
+}
+
+#subtabs-container .tab-strip .tab .favicon .spinner {
+  min-height: 12px;
+  min-width: 12px;
+  height: 12px;
+  width: 12px;
+}
+
+#subtabs-container .tab-strip .tab .title {
+  padding-left: calc(var(--padding) * 0.5);
+}
+
+#subtabs-container .tab-strip .tab button.close {
+  border-radius: 0 !important;
+  margin-right: 0;
+}
+
+/* -------------------------------------
+ *   Styles
+ * ------------------------------------- */
+
+.tab-strip {
+  background: linear-gradient(to bottom, #c2c2c2 0%, #bbbbbb 100%);
+}
+
+#subtabs-container {
+  background: #d2d3d4;
+  box-shadow: 0 -0.6px 0 rgba(170, 170, 170, 0.5) inset;
+}
+
+#subtabs-container .tab-strip {
+  background: transparent;
+}
+
+#subtabs-container .tab-strip::after {
+  display: none;
+  background: transparent !important;
+}
+
+.tab-strip::after {
+  background: linear-gradient(to bottom, #f0f0f0 0%, #aaaaaa 40%, #aaaaaa 100%) !important;
+}
+
+.tab-strip .tab {
+  background-color: rgba(0, 0, 0, 0) !important;
+  box-shadow: 0 -1px 0 0.52px #aeaeae !important;
+}
+
+#subtabs-container .tab-strip .tab {
+  box-shadow: 0 0 0 0.52px #aeaeae !important;
+}
+
+.tab-strip .tab.active {
+  background: linear-gradient(to bottom, #d8d8d8 0%, #cfcfcf 100%) !important;
+}
+
+#subtabs-container .tab-strip .tab.active {
+  background: linear-gradient(to bottom, #f1f1f1 0%, #eeeeee 100%) !important;
+}
+
+.tab-strip .tab:hover {
+  background-color: rgba(0, 0, 0, .1) !important;
+}

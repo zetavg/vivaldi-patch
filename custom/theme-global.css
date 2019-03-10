@@ -1,0 +1,20 @@
+/**
+ * A theme that provides native macOS experiences.
+ */
+
+#browser.mac:lang(zh-CN),
+#browser.mac + div:lang(zh-CN),
+#browser.mac + div + div:lang(zh-CN),
+#browser.mac button:lang(zh-CN),
+#browser.mac input:lang(zh-CN),
+#browser.mac select:lang(zh-CN),
+#browser.mac textarea:lang(zh-CN),
+#browser.mac:lang(zh-TW),
+#browser.mac + div:lang(zh-TW),
+#browser.mac + div + div:lang(zh-TW),
+#browser.mac button:lang(zh-TW),
+#browser.mac input:lang(zh-TW),
+#browser.mac select:lang(zh-TW),
+#browser.mac textarea:lang(zh-TW) {
+  font-family: 'SF', '.SFNSDisplay', 'PingFang TC', HelveticaNeue, LucidaGrande, 'LiHei Pro', 'Hiragino Sans GB', 冬青黑体, STXihei, 华文细黑, system-ui, sans-serif;
+}

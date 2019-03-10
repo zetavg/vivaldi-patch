@@ -1,0 +1,261 @@
+/**
+ * A theme that provides native macOS experiences.
+ */
+
+/* -------------------------------------
+ *   Reset
+ * ------------------------------------- */
+
+.toolbar-addressbar .button-toolbar:active > * {
+  transform: none !important;
+}
+
+/* -------------------------------------
+ *   Layout
+ * ------------------------------------- */
+
+.toolbar-addressbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.toolbar-addressbar .addressfield {
+  /*max-width: 512px;*/
+}
+
+.toolbar-addressbar .toolbar {
+  flex: 1;
+}
+
+.toolbar-addressbar .toolbar-end {
+  flex: 1.1;
+}
+
+.toolbar-addressbar .addressfield {
+  flex: 2.2;
+}
+
+.toolbar-addressbar .toolbar-end {
+  justify-content: flex-end;
+}
+
+/* ----- Layout: Top Left Toolbar ----- */
+
+.toolbar-addressbar .button-toolbar {
+  margin-right: 1px;
+}
+
+.toolbar-addressbar .button-toolbar.forward,
+.toolbar-addressbar .button-toolbar.next,
+.toolbar-addressbar .button-toolbar.toggle-panels {
+  margin-right: 10px;
+}
+
+.toolbar-addressbar .button-toolbar.rewind,
+.toolbar-addressbar .button-toolbar.next,
+.toolbar-addressbar .button-toolbar.reload,
+.toolbar-addressbar .button-toolbar.home {
+  display: none;
+}
+
+/* -------------------------------------
+ *   Logical & Fundamental Styles
+ * ------------------------------------- */
+
+.toolbar-addressbar {
+  box-shadow: inset 0 0.5px 0.5px #ffffff;
+  border-radius: 4px 4px 0 0;
+}
+
+.toolbar-addressbar::after {
+  ccontent: "";
+  z-index: 100;
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+}
+
+.toolbar-addressbar .button-toolbar {
+  border-radius: 4px !important;
+  border: none;
+  width: 25px;
+  min-width: 25px !important;
+  height: 22px !important;
+}
+
+.toolbar-addressbar .button-toolbar:disabled {
+  opacity: 1;
+}
+
+.toolbar-addressbar .button-toolbar:disabled > * {
+  transition: opacity 100ms;
+  opacity: 0.6;
+}
+
+.toolbar-addressbar .addressfield {
+  border-radius: 4px !important;
+  border: none;
+  height: 24px;
+}
+
+/* ----- Fundamental Styles: Things Inside The Address Field ----- */
+
+/* reset */
+
+.addressfield button.button-addressfield {
+  border-radius: var(--radiusRoundedLess);
+}
+
+.addressfield .addressfield-siteinfo:hover,
+.addressfield .addressfield-siteinfo:active,
+.addressfield .addressfield-siteinfo.secure:hover,
+.addressfield .addressfield-siteinfo.secure:active {
+  border-color: transparent;
+  background: none;
+  box-shadow: none;
+  color: var(--colorFg);
+  fill: var(--colorFg);
+}
+
+/* site info, cert */
+
+.addressfield .addressfield-siteinfo:not(.certified) {
+  border-right: 1px solid var(--colorBorderDisabled);
+}
+
+.addressfield .addressfield-siteinfo:not(.certified) .siteinfo-text {
+  padding-left: 2px;
+}
+
+.addressfield .addressfield-siteinfo.secure {
+  background-color: transparent;
+  color: var(--colorFgFadedMore);
+  fill: var(--colorFgFadedMore);
+}
+
+.addressfield .addressfield-siteinfo.certified {
+  color: #1ac578;
+}
+
+.addressfield .addressfield-siteinfo.insecure {
+  border-right: none;
+  background-color: #ff3b30;
+  border-color: transparent;
+  fill: #fff;
+}
+
+/* address input */
+
+.toolbar-addressbar input {
+  cursor: default;
+  color: var(--colorFgFaded);
+}
+
+.toolbar-addressbar input:focus {
+  cursor: text;
+  color: var(--colorFg);
+}
+
+/* pageload ticker */
+
+.addressfield .pageload .pageload-ticker {
+  font-weight: 200;
+}
+
+/* bookmark btn */
+
+.button-addressfield.bookmark svg .bookmark-outline,
+.button-addressfield.bookmark:hover:not(.bookmarked) svg .bookmark-outline {
+  fill: none;
+  stroke: var(--colorFgFaded);
+  stroke-width: 2px;
+}
+
+.button-addressfield.bookmark svg .bookmark-animated-fill {
+  fill: var(--colorFgFaded);
+}
+
+/* input dropdown btn */
+
+.button-addressfield.input-dropdown {
+  order: 1;
+  display: none;
+}
+
+.toolbar-addressbar .addressfield:focus-within .button-addressfield.input-dropdown {
+  display: block;
+}
+
+/* refresh btn */
+
+/* it will be the last child, set radius */
+.button-addressfield.refresh {
+  order: 999;
+  border-top-right-radius: var(--radius) !important;
+  border-bottom-right-radius: var(--radius) !important;
+}
+
+.button-addressfield.refresh .refresh-icon {
+  fill: var(--colorFgFaded);
+}
+
+.button-addressfield.refresh .stop-icon {
+  stroke: var(--colorFgFaded);
+  display: none;
+}
+
+.pageload.progressing ~ button.button-addressfield.refresh .refresh-icon {
+  display: none;
+}
+
+.pageload.progressing ~ button.button-addressfield.refresh .stop-icon {
+  display: block;
+}
+
+/* input suggestions area */
+
+.urlSearch {
+  border-radius: 4px;
+  box-shadow: 0 5px 32px rgba(0, 0, 0, 0.35);
+  margin-top: 2px;
+}
+
+/* -------------------------------------
+ *   Styles
+ * ------------------------------------- */
+
+#browser.theme-light .toolbar-addressbar {
+  background: linear-gradient(to bottom, #e6e6e6 0%, #d9d9d9 100%);
+}
+
+.toolbar-addressbar::after {
+  background: linear-gradient(to bottom, #f0f0f0 0%, #b3b3b3 40%, #b3b3b3 100%) !important;
+}
+
+#browser.theme-light .toolbar-addressbar .button-toolbar {
+  background: linear-gradient(to bottom, #fdfdfd 0%, #f4f4f4 100%);
+  box-shadow: inset 0 0.4px 0.4px #ffffff, 0 0.1px 0 0.5px #00000024, 0 0.5px 0.5px -0.5px #00000036;
+}
+
+#browser.theme-light .toolbar-addressbar .button-toolbar:active,
+#app.show-extensions #browser.theme-light .toolbar-addressbar .button-toolbar.toggle-extensions {
+  background: linear-gradient(to bottom, #e4e4e4 0%, #d4d4d4 100%);
+}
+
+#browser.theme-light .toolbar-addressbar .addressfield {
+  background: linear-gradient(to bottom, #fcfcfc 0%, #f4f4f4 100%);
+  box-shadow: inset 0 0.4px 0.4px #ffffff, 0 0.1px 0 0.5px #00000024, 0 0.5px 0.5px -0.5px #00000036;
+}
+
+#browser.theme-light .toolbar-addressbar .addressfield:focus-within,
+#browser.theme-light .toolbar-addressbar .searchfield:focus-within {
+  box-shadow: inset 0 0.4px 0.4px #ffffff, 0 0.1px 0 0.5px #00000024, 0 0.5px 0.5px -0.5px #00000036, 0 0 0.1px 2px var(--colorBorderHighlight);
+}
+
+#browser.theme-light .addressfield .addressfield-siteinfo:not(.certified) {
+  border-right-color: #ddd;
+}
