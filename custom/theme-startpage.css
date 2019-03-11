@@ -6,6 +6,12 @@
  *   Reset
  * ------------------------------------- */
 
+.manager .navigation .button-toolbar.previous svg,
+.manager .navigation .button-toolbar.next svg {
+  width: auto;
+  height: 16px;
+}
+
 /* -------------------------------------
  *   Layout
  * ------------------------------------- */

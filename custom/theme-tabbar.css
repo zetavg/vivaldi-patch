@@ -82,6 +82,7 @@
   height: 14px;
   width: 14px;
   flex: 0 0 14px;
+  order: -10;
 }
 
 .tab-strip .tab.pinned .favicon {
@@ -149,7 +150,7 @@
 }
 
 .tab-strip .tab .tab-indicator.active {
-  background-color: var(--colorAccentBgAlphaHeavy) !important;
+  background-color: var(--colorHighlightFg) !important;
 }
 
 .tab-strip .tab .tab-indicator:hover {
@@ -196,8 +197,18 @@
   border-radius: 0 !important;
 }
 
-.tab-strip .tab:not(:hover) .title {
-  margin-right: -12px;
+/* ----- Tab ----- */
+
+.tab-strip .tab .button-badge {
+  transform: scale(0.77);
+  top: 1px;
+  left: 16px;
+}
+
+.tab-strip .tab .tab-audio {
+  order: -5;
+  margin-right: calc(-1 * var(--padding));
+  margin-left: calc(var(--padding) - 4px) !important;
 }
 
 .tab-strip .tab .title {
@@ -210,6 +221,10 @@
 
 .tab-strip .tab.active .title {
   opacity: 1;
+}
+
+.tab-strip .tab:not(:hover) .title {
+  margin-right: -12px;
 }
 
 .tab-strip .tab button.close {
@@ -237,6 +252,8 @@
   max-width: 24px;
 }
 
+/* ----- Subtab Overrides  ----- */
+
 #subtabs-container {
   transition-property: padding;
   transition-duration: 0.3s;
@@ -255,10 +272,6 @@
   padding-bottom: 0;
 }
 
-#subtabs-container .tab-strip .tab .tab-header .title {
-  padding-top: 1px;
-}
-
 #subtabs-container .tab-strip .tab .favicon {
   margin-left: 4px;
   min-height: 12px;
@@ -275,7 +288,22 @@
   width: 12px;
 }
 
+#subtabs-container .tab-strip .tab .tab-audio {
+  margin-right: calc(-1 * var(--padding) + 2px);
+}
+
+#subtabs-container .tab-strip .tab .button-badge {
+  transform: scale(0.6);
+  top: -0.6px;
+  left: 8px;
+}
+
+#subtabs-container .tab-strip .tab .tab-audio .audioicon {
+  transform: scale(0.47);
+}
+
 #subtabs-container .tab-strip .tab .title {
+  padding-top: 1px;
   padding-left: calc(var(--padding) * 0.5);
 }
 
@@ -315,6 +343,14 @@
   box-shadow: 0 -1px 0 0.52px #aeaeae !important;
 }
 
+.tab-strip .tab .progress-indicator {
+  background-color: var(--colorFgAlpha) !important;
+}
+
+#subtabs-container .tab-strip .tab .progress-indicator {
+  background-color: var(--colorFgAlpha) !important;
+}
+
 #subtabs-container .tab-strip .tab {
   box-shadow: 0 0 0 0.52px #aeaeae !important;
 }
@@ -329,4 +365,12 @@
 
 .tab-strip .tab:hover {
   background-color: rgba(0, 0, 0, .1) !important;
+}
+
+.tab-strip .tab .button-badge {
+  background-color: #6d6d6d;
+}
+
+.tab-strip .tab .tab-audio {
+  opacity: 0.88;
 }
