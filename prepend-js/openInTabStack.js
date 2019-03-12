@@ -1,3 +1,7 @@
 const openInTabStack = () => {
-  return window.lastShortcut === 'Alt+Meta+'
+  if (window.placeNextTabInTabStack === true) {
+    window.placeNextTabInTabStack = false
+    return true
+  }
+  return window.lastShortcut === 'Meta+'
 }

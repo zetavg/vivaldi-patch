@@ -298,3 +298,16 @@ window.addToTabStackNext = () => {
 window.addToTabStackPrev = () => {
   windowUtils.createTabStack(Immutable.List([getActivePage(), getNextPage().page]))
 }
+
+window.newTabInStack = () => {
+  const activePage = getActivePage()
+  windowUtils.openURL('', { inBackground: true }, (page) => {
+    const newPage = new activePage.constructor(page)
+    window.windowUtils.createTabStack(Immutable.List([activePage, newPage]))
+    window.windowUtils.openPage(newPage)
+  })
+}
+
+window.newTab = () => {
+  windowUtils.openURL('', {})
+}

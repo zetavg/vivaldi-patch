@@ -57,6 +57,12 @@ vivaldi.tabsPrivate.onKeyboardShortcut.addListener(shortcut => {
     case 'Alt+Meta+2':
       windowUtils.tilePages(Immutable.List([getActivePage(), getNextPage().page]))
       break
+    case 'Meta+T':
+      newTabInStack()
+      break
+    case 'Shift+Meta+T':
+      newTab()
+      break
   }
 })
 

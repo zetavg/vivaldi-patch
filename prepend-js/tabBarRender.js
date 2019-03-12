@@ -101,6 +101,7 @@ const getComponents = () => {
             page: p.setIn(['extData', 'group'], null),
             id: p.id,
             subtab: true,
+            parentTab: activeTab,
           })),
         }),
       )
